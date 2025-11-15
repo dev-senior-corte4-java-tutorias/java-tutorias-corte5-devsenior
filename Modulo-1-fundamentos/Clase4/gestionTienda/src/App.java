@@ -16,7 +16,7 @@ public class App {
     public static void main(String[] args)  {
         Scanner scanner = new Scanner(System.in);
         int opcion =0;
- 
+
         do {
             mostrarMenu();
             opcion = scanner.nextInt();
