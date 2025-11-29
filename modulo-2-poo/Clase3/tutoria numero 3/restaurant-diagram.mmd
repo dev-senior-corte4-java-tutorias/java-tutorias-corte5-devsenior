@@ -1,0 +1,99 @@
+classDiagram
+    class RestaurantApp {
+        +main(String[] args)$ void
+    }
+
+    class MenuItem {
+        -String name
+        -double price
+        +MenuItem(String name, double price)
+        +getName() String
+        +getPrice() double
+    }
+
+    class OrderItem {
+        -MenuItem menuItem
+        -int quantity
+        +OrderItem(MenuItem menuItem, int quantity)
+        +getMenuItem() MenuItem
+        +getQuantity() int
+        +calculateSubtotal() double
+    }
+
+    class Order {
+        -int orderNumber
+        -String status
+        -OrderItem[] items
+        -int itemCount
+        +Order(int orderNumber, int maxItems)
+        +addItem(OrderItem item) void
+        +calculateTotal() double
+        +displayDetails() void
+        +getOrderNumber() int
+        +getStatus() String
+        +getItems() OrderItem[]
+    }
+
+    class Menu {
+        -String name
+        -MenuItem[] items
+        +Menu(String name, MenuItem[] items)
+        +displayItems() void
+        +findItem(String itemName) MenuItem
+        +getName() String
+        +getItems() MenuItem[]
+    }
+
+    class Table {
+        -int tableNumber
+        -int capacity
+        -boolean isOccupied
+        -Order currentOrder
+        +Table(int tableNumber, int capacity)
+        +assignOrder(Order order) void
+        +clearTable() void
+        +getTableNumber() int
+        +getCapacity() int
+        +isOccupied() boolean
+        +getCurrentOrder() Order
+    }
+
+    class Employee {
+        -String name
+        -String id
+        +Employee(String name, String id)
+        +getName() String
+        +getId() String
+    }
+
+    class Restaurant {
+        -String name
+        -String address
+        -Table[] tables
+        -Employee[] employees
+        -Menu menu
+        +Restaurant(String name, String address, Table[] tables, Employee[] employees, Menu menu)
+        +displayMenu() void
+        +findTable(int tableNumber) Table
+        +getName() String
+        +getAddress() String
+        +getTables() Table[]
+        +getEmployees() Employee[]
+        +getMenu() Menu
+    }
+
+    RestaurantApp ..> Restaurant
+    RestaurantApp ..> MenuItem
+    RestaurantApp ..> Menu
+    RestaurantApp ..> Employee
+    RestaurantApp ..> Table
+    RestaurantApp ..> Order
+    RestaurantApp ..> OrderItem
+
+    Order *-- OrderItem
+    OrderItem --> MenuItem
+    Menu o-- MenuItem
+    Restaurant o-- Table
+    Restaurant o-- Employee
+    Restaurant o-- Menu
+    Table --> Order
